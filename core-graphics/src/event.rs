@@ -619,6 +619,12 @@ impl CGEvent {
         unsafe { CGEventGetLocation(self.as_ptr()) }
     }
 
+    pub fn set_location(&self, location: CGPoint) {
+        unsafe {
+            CGEventSetLocation(self.as_ptr(), location);
+        }
+    }
+
     #[cfg(feature = "elcapitan")]
     pub fn post_to_pid(&self, pid: libc::pid_t) {
         unsafe {
@@ -828,4 +834,5 @@ extern "C" {
 
     fn CGEventTapEnable(tap: CFMachPortRef, enable: bool);
 
+    fn CGEventSetLocation(event: crate::sys::CGEventRef, location: CGPoint);
 }
